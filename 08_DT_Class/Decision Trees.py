@@ -138,6 +138,8 @@ cl= DecisionTreeClassifier(random_state=1000)
 #Set up search for best decisiontreeclassifier estimator across all of our folds based on roc_auc
 search = GridSearchCV(cl, param, scoring=scoring, n_jobs=-1, cv=kf,refit='roc_auc')
 
+
+#%%
 #execute search on our training data, this may take a few seconds ...
 model = search.fit(X_train, y_train)
 
@@ -193,7 +195,7 @@ print(final_model.head())
 
 # %%
 #Warning!
-#If we used mutiple params... you won't be able to get the scores as easily
+#If we used multiple params... you won't be able to get the scores as easily
 #Say we wanted to get the scores based on max_depth still, but this time we used the parameter ccp_alpha as well
 #Use the np.where function to search for the indices where the other parameter equals their best result, in this say it is .001
 #This is an example code to find auc: #model.cv_results_['mean_test_roc_auc'][np.where((model.cv_results_['param_ccp_alpha'] == .001))]
